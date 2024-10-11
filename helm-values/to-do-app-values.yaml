@@ -1,0 +1,11 @@
+replicaCount: 1  # Number of replicas for the Python app
+
+image:
+  repository: your-python-app-image  # Your Python app's Docker image
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+  targetPort: 5000

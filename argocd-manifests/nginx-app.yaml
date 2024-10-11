@@ -1,23 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: myapp-argo-application
+  name: nginx-app
   namespace: argocd
 spec:
   project: default
 
   source:
-    repoURL: https://github.com/Seyi-Ojo/argocd-app-config.git
+    repoURL: https://github.com/Seyi-OjoArgoCD-ToDoApp/.git
     targetRevision: HEAD
-    path: dev
+    path: 'ARGOCD-TODOAPP/nginx'
+    helm:
+      valueFiles:
+      - '../helm-values/nginx-values.yaml'
   destination: 
     server: https://kubernetes.default.svc
-    namespace: myapp
-
+    namespace: default
   syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-
     automated:
       selfHeal: true
       prune: true
